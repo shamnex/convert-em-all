@@ -1,0 +1,14 @@
+{
+  "name": "x-converter",
+  "version": "1.0.0",
+  "description": "Offline Currency Converter",
+  "main": "app.js",
+  "scripts": {
+    "compile:sass": "node-sass sass/main.scss css/style.css -w"
+  },
+  "author": "shamnex",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^4.7.2"
+  }
+}
