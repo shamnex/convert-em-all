@@ -1,15 +1,14 @@
 //Colors
 $color-primary:  #0A6F6C; 
 $color-secondary:  #31B808; 
-$color-gradient: linear-gradient( #0A6F6C,  #31B808);
+$color-gradient: linear-gradient( to right top, #31B808,  #0A6F6C);
 
 
-$color-grey-light:   #f7f7f7;
-$color-grey-dark:   #777;
+$color-grey-white:   #F4F4F4;
 $color-white:   #fff;
 $color-black: rgb(51, 51, 51);
 
-$box-shadow: 0.8rem 0.8rem 15rem rgba($color-black, 0.4);
+$shadow: 1.8rem 2.8rem 10rem rgba($color-black, 0.9);
 
 
 //FONT SIZE

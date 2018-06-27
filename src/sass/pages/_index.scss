@@ -1,0 +1,87 @@
+.index-body {
+    background-image: $color-gradient;
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
+    height: 100vh;
+    &::before {
+        content: "";
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: url("../img/bg_pattern_white.svg");
+        background-size: 70rem;
+        opacity: 0.09;
+        overflow: hidden;
+    }
+    .container {
+        max-height: 50rem;
+        border-right: 3rem;
+        max-width: 85rem;
+        height: 50rem;
+        width: 85rem;
+        overflow: hidden;
+        background-color: $color-white;
+        @include absolutecenter;
+        box-shadow: $shadow;
+        &__header {
+            background: $color-grey-white;
+            padding: 2rem;
+            position: relative;
+            &::after {
+                background: $color-gradient;
+                content: "";
+                height: .5rem;
+                width: 50%;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%)
+            }
+        }
+        &__body {
+            @include absolutecenter;
+            width: 70%;
+        }
+    }
+    .converter {
+        margin-top: 5rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &__item {
+            padding: 0 .5rem;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            &__amount {
+                flex-grow: 2;
+                
+            }
+            &__currency {
+                flex-grow: 1;
+                color: $color-primary;
+                flex-shrink: 1.7;
+                font-weight: 300;
+                padding: 0;
+            }
+        }
+    }
+    .btn {
+        width: 50%;
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+        margin-top: 6rem;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%)
+
+        
+    }
+}
