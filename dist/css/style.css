@@ -9,8 +9,7 @@ html {
   font-size: 62.5%; }
 
 body {
-  box-sizing: border-box;
-  background: linear-gradient(to right); }
+  box-sizing: border-box; }
 
 body {
   font-family: "Lato", sans-serif;
@@ -109,3 +108,7 @@ body {
     width: calc(2*((100% - 3 * 5rem)/4) + 5rem); }
   .row .col-3-of-4 {
     width: calc(3*((100% - 3 * 5rem)/4) + 2 * 5rem); }
+
+.body {
+  background-repeat: no-repeat;
+  height: 100vh; }

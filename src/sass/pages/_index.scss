@@ -43,13 +43,14 @@
         }
         &__body {
             @include absolutecenter;
-            width: 70%;
+            width: 90%;
         }
     }
     .converter {
         margin-top: 5rem;
         width: 100%;
         display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
         &__item {
@@ -58,14 +59,15 @@
         .input-group {
             display: flex;
             align-items: center;
+            flex-grow: 1;
             &__amount {
-                flex-grow: 2;
+                flex-grow: 1;
                 
             }
             &__currency {
-                flex-grow: 1;
+                // flex-grow: 1;
                 color: $color-primary;
-                flex-shrink: 1.7;
+                // flex-shrink: 1.7;
                 font-weight: 300;
                 padding: 0;
             }
