@@ -15,7 +15,7 @@ const currencyController = async () => {
 
     state.currencies = new Currencies();
     await state.currencies.getCurrencies();
-    currencyView.renderResults(state.currencies.currencies);
+    currencyView.displayCurrencies(state.currencies.currencies);
 }
 
 // const countryController = async () => {
@@ -36,17 +36,14 @@ const convertController = async () => {
     const toCurrency = await convertView.getToCurrencyValue();
     const amount = await convertView.getAmountValue();
 
-
     //2) get hold of the converter
     state.converter =  new convertCurrency(amount, fromCurrency, toCurrency);
 
-    
     //3) Convert it
     await state.converter.convertCurrency();
 
-    //4) 
-
-    // console.log(state.converter.result);
+    //4)Display Result
+    convertView.displayResults(state.converter.result);
 
 }
 window.onload =()=> {
@@ -54,8 +51,14 @@ window.onload =()=> {
     currencyController();
 }
 
-elements.amountInput.addEventListener("keypress", function(e) {
-    // console.log(e)
+elements.amountInput.addEventListener("input", function(e) {
+    convertController();
+})
+
+elements.amountInput.addEventListener("change", function(e) {
+    convertController();
+})
+elements.amountInput.addEventListener("change", function(e) {
     convertController();
 })
 
