@@ -5,8 +5,8 @@ export default class Countries {
     }
     async getCountries() {
         try {
-            const { data: { results: countries } }
-                = await fetch(`${constants.BASE_URL}${constants.COUNTRY_URL}`);
+            const { results: countries } 
+                = await (await fetch(`${constants.BASE_URL}${constants.COUNTRY_URL}`)).json();
              this.countries = Object.values(countries);
 
         } catch (error) {

@@ -5,8 +5,9 @@ export default class Countries {
     }
     async getCurrencies() {
         try {
-            const { data: { results: currencies } }
-                = await fetch(`${constants.BASE_URL}${constants.CURRENCIES_URL}`);
+            const { results: currencies } 
+                = await ( await fetch(`${constants.BASE_URL}${constants.CURRENCIES_URL}`)).json();
+                console.log(currencies);
              this.currencies = Object.values(currencies);
         } catch (error) {
             console.log(error.message);

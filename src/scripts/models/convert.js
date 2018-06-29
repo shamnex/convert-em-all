@@ -11,7 +11,7 @@ export default class Conversion {
         try {
             const query = `${this.fromCurrency}_${this.toCurrency}`;
             const URL = `${constants.BASE_URL}${constants.CONVERT_URL}${query}&compact=ultra`;
-            const { data: res  } = await fetch(`${URL}`);
+            const res = await (await fetch(`${URL}`)).json();
             const value = +res[`${query}`];
 
             if (value) {
