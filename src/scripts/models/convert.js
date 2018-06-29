@@ -10,8 +10,13 @@ export default class Conversion {
     async convertCurrency() {
         try {
             const query = `${this.fromCurrency}_${this.toCurrency}`;
-            const url = `${constants.BASE_URL}${constants.CONVERT_URL}${query}&compact=ultra`;
+            const queryInverse = `${this.toCurrency}_${this.fromCurrency}`;
+            const url = `${constants.BASE_URL}${constants.CONVERT_URL}${query},${queryInverse}&compact=ultra`;
+
+            if(!this.fromCurrency || !this.toCurrency ) return;
+
             const res = await (await fetch(url)).json();
+            console.log(res);
             const value = +res[query];
 
             if (value) {

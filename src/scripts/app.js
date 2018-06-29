@@ -2,7 +2,7 @@
 import Countries from "./models/country";
 import Currencies from "./models/currency";
 import ConvertCurrency from "./models/convert";
-import ServiceWorker from "./models/serviceWorker";
+import ServiceWorker from "./models/service-worker";
 import * as currencyView from "./views/currencyView"
 import * as convertView from "./views/convertView"
 import { elements } from './views/base';
@@ -73,6 +73,19 @@ const convertController = async () => {
 const handleInputChange = (event)=> {
         convertController();
 }
+
+// const debounce = (delay, fn) => {
+//     let timerId;
+//     return function (...args) {
+//       if (timerId) {
+//         clearTimeout(timerId);
+//       }
+//       timerId = setTimeout(() => {
+//         fn(...args);
+//         timerId = null;
+//       }, delay);
+//     }
+//   }
 
 //===================================
 // EVENT LISTENERS

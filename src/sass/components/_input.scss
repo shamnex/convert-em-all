@@ -8,10 +8,23 @@
     font-size: 1.4rem;
     font-weight: 300;
     width: 100%;
+    transition: all 0.3s ease;
+
+    @include respond(phone) {
+        height: 7rem;
+        font-size: 1.4rem;
+        border-bottom: solid .7rem $color-primary;
+    }
 
     
     &__border-secondary {
         border-bottom: solid 1rem $color-secondary;
+        
+    @include respond(phone) {
+
+        border-bottom: solid .7rem $color-secondary;
+    }
+
 
     }
 
@@ -19,6 +32,11 @@
         border: none;
         border-bottom: solid 1rem $color-primary;
         outline: none;
+        @include respond(phone) {
+
+            border-bottom: solid .7rem $color-secondary;
+        }
+    
     }
 }
 

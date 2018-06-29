@@ -6,8 +6,8 @@
     "scripts": {
         "compile:sass": "node-sass src/sass/main.scss dist/css/style.css -w",
         "start": "concurrently \"npm run compile:sass\" \"npm run build\" \"live-server ./dist \"",
-        "build": "webpack --mode production",
-        "dev": "webpack --mode development"
+        "build": "webpack --mode production -w",
+        "dev": "webpack --mode development -w"
     },
     "author": "shamnex",
     "license": "ISC",
