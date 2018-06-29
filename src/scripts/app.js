@@ -8,7 +8,16 @@ import { elements } from './views/base';
 
 
 
+
+
+
 const state = {
+}
+
+const swController = async () => {
+    if(!navigator.serviceWorker) return;
+
+    
 }
 
 const currencyController = async () => {
@@ -31,7 +40,7 @@ const currencyController = async () => {
 
 
 const convertController = async () => {
-    //1) get input values
+    //1) get input values from UI
     const fromCurrency = await convertView.getFromCurrencyValue();
     const toCurrency = await convertView.getToCurrencyValue();
     const amount = await convertView.getAmountValue();
@@ -39,27 +48,41 @@ const convertController = async () => {
     //2) get hold of the converter
     state.converter =  new convertCurrency(amount, fromCurrency, toCurrency);
 
-    //3) Convert it
-    await state.converter.convertCurrency();
+    //3) show loading...TODO
+    convertView.showSpinner();
 
-    //4)Display Result
+    //4) Convert it
+    await state.converter.convertCurrency();
+    if(!state.converter.result || !amount)  return convertView.clearResults();
+
+    //5)Display Result
     convertView.displayResults(state.converter.result);
 
 }
+//===================================
+// FUNCTIONS
+//===================================
+
+const handleInputChange = (event)=> {
+        convertController();
+}
+
+
+//===================================
+// EVENT LISTENERS
+//===================================
+
 window.onload =()=> {
     // countryController();
     currencyController();
 }
 
-elements.amountInput.addEventListener("input", function(e) {
-    convertController();
-})
+elements.amountInput.addEventListener("input", handleInputChange);
+elements.fromCurrency.addEventListener("change",handleInputChange);
+elements.toCurrency.addEventListener("change",handleInputChange);
 
-elements.amountInput.addEventListener("change", function(e) {
-    convertController();
-})
-elements.amountInput.addEventListener("change", function(e) {
-    convertController();
-})
+//===================================
+// 
+//===================================
 
 

@@ -10,7 +10,7 @@ export default class Countries {
                 = await axios.get(`${constants.BASE_URL}${constants.CURRENCIES_URL}`);
              this.currencies = Object.values(currencies);
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
         };
     }
 }

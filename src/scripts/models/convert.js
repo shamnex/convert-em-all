@@ -11,7 +11,7 @@ export default class Conversion {
     async convertCurrency() {
         try {
             const query = `${this.fromCurrency}_${this.toCurrency}`;
-            const URL = `${constants.BASE_URL}/api/v5/convert?q=${query}&compact=ultra`;
+            const URL = `${constants.BASE_URL}${constants.CONVERT_URL}${query}&compact=ultra`;
             const { data: res  } = await axios.get(`${URL}`);
             const value = +res[`${query}`];
 
@@ -23,7 +23,7 @@ export default class Conversion {
                 throw(error);
             }
         } catch (error) {
-            console.log("Got an error: ", error);
+            console.log("Got an error: ", error.message);
         };
     }
 }
