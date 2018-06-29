@@ -1,15 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>KonVat Dem</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,900" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <header>
 
-    </header>
+<body class="index-body">
+    <div class="container">
+        <header class="container__header">
+            <h1 class="heading-secondary u-text-primary u-text-center">
+                KONVATAM
+            </h1>
+        </header>
+        <div class="container__body">
+          
+            <div class="converter">
+                <div class="">
+                    <input class="input input-group__amount" placeholder="Enter Amount" type="number" name="" id="amount">
+                </div>
+
+                <div class="converter__item">
+                    <div class="input-group">
+                        <select class="input input-group__currency" name="" id="currency_from">
+                        </select>
+                    </div>
+                </div>
+                <div class="converter__item">
+                        <div class="input-group">
+                            <!-- <input class="input input__border-secondary input-group__amount" placeholder="Result" disabled type="number" name="" id=""> -->
+                            
+                            <select class="input input__border-secondary   input-group__currency" name="" id="currency_to">
+
+                            </select>
+                        </div>
+                    </div> 
+                    
+
+    
+                <!-- <div class="converter__item">
+                    <div class="input-group">
+                        <input class="input input-group__amount" placeholder="Enter Amout" disabled type="text" name="" id="">
+    
+                        <div class="select input" tabindex="1">
+                            <input class="selectopt" name="test" type="radio" id="opt1" checked>
+                            <label for="opt1" class="option">$(USD)</label>
+                            <input class="selectopt" name="test" type="radio" id="opt2" checked>
+                            <label for="opt2" class="option">N(NGN)</label>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+                <div class="results u-text-center">
+             
+                    </div>
+        <!-- <div class="btn">RESET</div> -->
+
+
+    </div>
 <script type="text/javascript" src="scripts/bundle.js"></script></body>
+
 </html>
