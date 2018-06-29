@@ -1,22 +1,28 @@
-import './../sass/main.scss';
+// import './../sass/main.scss';
 import Countries from "./models/country";
 import Currencies from "./models/currency";
-import convertCurrency from "./models/convert";
+import ConvertCurrency from "./models/convert";
+import ServiceWorker from "./models/serviceWorker";
 import * as currencyView from "./views/currencyView"
 import * as convertView from "./views/convertView"
 import { elements } from './views/base';
 
 
-
-
-
+//===================================
+// APP STATE
+//===================================
 
 const state = {
 }
 
-const swController = async () => {
-    if(!navigator.serviceWorker) return;
+//===================================
+// CONTROLLERS
+//===================================
 
+const swController = async () => {
+    
+    state.serviceWorker = new ServiceWorker();
+    await state.serviceWorker.registerSW();
     
 }
 
@@ -38,15 +44,15 @@ const currencyController = async () => {
 //     console.log(state.countries.countries);
 // }
 
-
 const convertController = async () => {
+
     //1) get input values from UI
     const fromCurrency = await convertView.getFromCurrencyValue();
     const toCurrency = await convertView.getToCurrencyValue();
     const amount = await convertView.getAmountValue();
 
     //2) get hold of the converter
-    state.converter =  new convertCurrency(amount, fromCurrency, toCurrency);
+    state.converter =  new ConvertCurrency(amount, fromCurrency, toCurrency);
 
     //3) show loading...TODO
     convertView.showSpinner();
@@ -59,14 +65,14 @@ const convertController = async () => {
     convertView.displayResults(state.converter.result);
 
 }
+
 //===================================
-// FUNCTIONS
+// HELPER FUNCTIONS
 //===================================
 
 const handleInputChange = (event)=> {
         convertController();
 }
-
 
 //===================================
 // EVENT LISTENERS
@@ -74,7 +80,9 @@ const handleInputChange = (event)=> {
 
 window.onload =()=> {
     // countryController();
+    swController();
     currencyController();
+
 }
 
 elements.amountInput.addEventListener("input", handleInputChange);

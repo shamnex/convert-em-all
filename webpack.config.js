@@ -1,6 +1,7 @@
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 
+
 module.exports = {
     entry: ["babel-polyfill", "./src/scripts/app.js"],
     output: {
@@ -14,7 +15,9 @@ module.exports = {
         new htmlWebpackPlugin({
             filename: "index.html",
             template: "./src/index.html"
-        })
+        }),
+
+    
     ],
     module: {
         rules: [
@@ -26,31 +29,31 @@ module.exports = {
                 }
             },
 
-            {
-                exclude: /node_modules/,
-                test: /\.scss$/,
-                use: [
-                    {
-                        loader: "style-loader" // creates style nodes from JS strings
-                    },
-                    {
-                        loader: "css-loader" // translates CSS into CommonJS
-                    },
-                    {
-                        loader: "sass-loader" // compiles Sass to CSS
-                    }
-                ]
-            },
+            // {
+            //     exclude: /node_modules/,
+            //     test: /\.scss$/,
+            //     use: [
+            //         {
+            //             loader: "style-loader" // creates style nodes from JS strings
+            //         },
+            //         {
+            //             loader: "css-loader" // translates CSS into CommonJS
+            //         },
+            //         {
+            //             loader: "sass-loader" // compiles Sass to CSS
+            //         }
+            //     ]
+            // },
 
-            {
-                test: /\.(png|jpg|gif|svg)$/,
-                use: [
-                  {
-                    loader: 'file-loader',
-                    options: {}
-                  }
-                ]
-              }
+            // {
+            //     test: /\.(png|jpg|gif|svg)$/,
+            //     use: [
+            //       {
+            //         loader: 'file-loader',
+            //         options: {}
+            //       }
+            //     ]
+            //   }
         ]
     }
 };
