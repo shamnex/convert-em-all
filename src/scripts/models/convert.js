@@ -9,14 +9,14 @@ export default class Conversion {
     }
     async convertCurrency() {
         try {
-            const query = `${this.fromCurrency}_${this.toCurrency}`;
+            this.query = `${this.fromCurrency}_${this.toCurrency}`;
             const queryInverse = `${this.toCurrency}_${this.fromCurrency}`;
-            const url = `${constants.BASE_URL}${constants.CONVERT_URL}${query},${queryInverse}&compact=ultra`;
+            const url = `${constants.BASE_URL}${constants.CONVERT_URL}${this.query},${queryInverse}&compact=ultra`;
 
             if(!this.fromCurrency || !this.toCurrency ) return;
 
-            const res = await (await fetch(url)).json();
-            const value = +res[query];
+            this.rates = await (await fetch(url)).json();
+            const value = +this.rates[this.query];
 
             if (value) {
                 var total = value * this.amount;

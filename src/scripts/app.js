@@ -1,7 +1,7 @@
 // import './../sass/main.scss';
 import Countries from "./models/country";
 import Currencies from "./models/currency";
-import ConvertCurrency from "./models/convert";
+import Converter from "./models/convert";
 import ServiceWorker from "./models/service-worker";
 import IDB from "./models/idb";
 import * as currencyView from "./views/currencyView"
@@ -29,7 +29,7 @@ const swController = async () => {
 
 const idbController = async ()=> {
     state.idb = new IDB();
-    state.idb.init();
+    state.idb.open();
 
 }
 
@@ -61,13 +61,20 @@ const convertController = async () => {
     const amount = await convertView.getAmountValue();
 
     //2) get hold of the converter
-    state.converter =  new ConvertCurrency(amount, fromCurrency, toCurrency);
+    state.converter =  new Converter(amount, fromCurrency, toCurrency);
 
     //3) show loading...TODO
     convertView.showSpinner();
 
     //4) Convert it
     await state.converter.convertCurrency();
+
+    //5) Save To DB
+    if(state.converter.rates) {
+        const key = state.converter.query;
+        const val = state.converter.rates;
+        state.idb.setItem(key, val);
+    }
 
     if(state.converter.error) return convertView.showError(state.converter.error)
 
