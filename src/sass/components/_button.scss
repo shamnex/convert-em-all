@@ -22,7 +22,7 @@
         background: $color-gradient;
     }
     &:hover {
-        transform: translateY(-0.3rem);
+        // transform: translateY(-0.3rem);
         box-shadow: 0 10px 20px rgba($color-black,.2);
         &::before {
             background-position-y: 200%;

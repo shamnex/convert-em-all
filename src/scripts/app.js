@@ -59,7 +59,13 @@ const convertController = async () => {
 
     //4) Convert it
     await state.converter.convertCurrency();
+
+    if(state.converter.error) return convertView.showError(state.converter.error)
+
+
+    //5) Convert it
     if(!state.converter.result || !amount)  return convertView.clearResults();
+
 
     //5)Display Result
     convertView.displayResults(state.converter.result);

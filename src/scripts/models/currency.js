@@ -7,10 +7,10 @@ export default class Countries {
         try {
             const url = `${constants.BASE_URL}${constants.CURRENCIES_URL}`;
             const { results: currencies } = await ( await fetch(url)).json();
-                console.log(currencies);
              this.currencies = Object.values(currencies);
         } catch (error) {
-            console.log(error.message);
+            this.error = error;
+            console.log(error);
         };
     }
 }

@@ -16,7 +16,6 @@ export default class Conversion {
             if(!this.fromCurrency || !this.toCurrency ) return;
 
             const res = await (await fetch(url)).json();
-            console.log(res);
             const value = +res[query];
 
             if (value) {
@@ -24,10 +23,12 @@ export default class Conversion {
                 this.result = Math.round(total * 100) / 100;
             } else {
                 const error = new Error(`value not found for ${query}`);
+                this.error = error;
                 throw(error);
             }
         } catch (error) {
-            console.log("Got an error: ", error.message);
+            this.error = error;
+            console.log(error);
         };
     }
 }
