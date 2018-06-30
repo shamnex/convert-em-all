@@ -355,9 +355,10 @@ input:checked + label {
       margin: 8rem auto;
       display: flex;
       flex-direction: column;
-      height: 60%; }
+      height: 10%; }
       @media (max-width: 37.5em) {
         .index-body .container__body {
+          height: 60%;
           margin: 2rem auto; } }
   .index-body .converter {
     width: 100%;

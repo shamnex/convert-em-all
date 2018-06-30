@@ -82,8 +82,9 @@
             margin: 8rem auto;
             display: flex;
             flex-direction: column;
-            height: 60%;
+            height: 10%;
             @include respond(phone) {
+                height: 60%;
                 margin: 2rem auto;
             }
         }

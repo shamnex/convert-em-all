@@ -2,7 +2,8 @@
 import Countries from "./models/country";
 import Currencies from "./models/currency";
 import ConvertCurrency from "./models/convert";
-import ServiceWorker from "./controllers/service-worker";
+import ServiceWorker from "./models/service-worker";
+import IDB from "./models/idb";
 import * as currencyView from "./views/currencyView"
 import * as convertView from "./views/convertView"
 import * as toastView from "./views/toastView"
@@ -24,6 +25,14 @@ const swController = async () => {
     await state.serviceWorker.registerSW();
     
 }
+
+
+const idbController = async ()=> {
+    state.idb = new IDB();
+    state.idb.init();
+
+}
+
 
 const currencyController = async () => {
     
@@ -98,6 +107,7 @@ const handleInputChange = (event)=> {
 document.addEventListener("DOMContentLoaded", () => {
     // countryController();
     swController();
+    idbController();
     currencyController();
 })
 
