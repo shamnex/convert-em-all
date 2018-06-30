@@ -1,7 +1,7 @@
 //THIS SERVICE WORKER FILE IS IGNORED DURING WEBPACK"S BUNDLING
 // IT'S COPIED DIRECTLY INTO THE 'dist' FOLDER ROOT
 
-const CACHE_STATIC = "konvatam-skeleton-v62";
+const CACHE_STATIC = "konvatam-skeleton-v64";
 const CACHE_DYNAMIC = "konvatam-dynamic";
 const APP_SHELL_URLS = [
     '/',
@@ -10,7 +10,10 @@ const APP_SHELL_URLS = [
     '/img/bg_pattern_white.svg',
     '/img/bg_pattern.svg',
     '/scripts/bundle.js',
-]
+    'https://fonts.gstatic.com/s/raleway/v12/1Ptug8zYS_SKggPNyC0IT4ttDfA.woff2',
+    'https://fonts.gstatic.com/s/raleway/v12/1Ptrg8zYS_SKggPNwIYqWqZPANqczVs.woff2'
+];
+
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
@@ -38,9 +41,8 @@ self.addEventListener('fetch', (event) => {
         caches.match(event.request) //check for match in cache
             .then((cacheResponse) => {
                 if (cacheResponse) return cacheResponse; //if theres a match return it
-                
                 const requestClone = event.request.clone();
-                return fetch(requestClone) //if not fetch from networ
+                return fetch(requestClone) //if not fetch from networl
                     .then((networkResponse) => {
                         return caches.open(CACHE_DYNAMIC)// store the res  in cache 
                             .then((cache) => {

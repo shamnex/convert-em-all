@@ -2,8 +2,9 @@
 import Countries from "./models/country";
 import Currencies from "./models/currency";
 import Converter from "./models/convert";
-import ServiceWorker from "./models/service-worker";
 import IDB from "./models/idb";
+
+import ServiceWorker from "./models/service-worker";
 import * as currencyView from "./views/currencyView"
 import * as convertView from "./views/convertView"
 import * as toastView from "./views/toastView"
@@ -23,11 +24,11 @@ const swController = async () => {
 
     state.serviceWorker = new ServiceWorker();
     await state.serviceWorker.registerSW();
-    
+
 }
 
+const idbController = async () => {
 
-const idbController = async ()=> {
     state.idb = new IDB();
     state.idb.open();
 
@@ -35,10 +36,11 @@ const idbController = async ()=> {
 
 
 const currencyController = async () => {
-    
+
     state.currencies = new Currencies();
     await state.currencies.getCurrencies();
     currencyView.displayCurrencies(state.currencies.currencies);
+    state.idb.setItem({id:, state.currencies.currencies});
 
 }
 
@@ -48,41 +50,49 @@ const currencyController = async () => {
 //     //2 ) Get results //TODO
 //     state.countries = new Countries();
 //     await state.countries.getCountries();
- 
+
 //     //RENDER COUNTRIES ON UI //TOT
 //     console.log(state.countries.countries);
 // }
 
 const convertController = async () => {
 
-    //1) get input values from UI
+    // get input values from UI
     const fromCurrency = await convertView.getFromCurrencyValue();
     const toCurrency = await convertView.getToCurrencyValue();
     const amount = await convertView.getAmountValue();
 
-    //2) get hold of the converter
-    state.converter =  new Converter(amount, fromCurrency, toCurrency);
+    //get hold of the converter
+    state.converter = new Converter(amount, fromCurrency, toCurrency);
 
-    //3) show loading...TODO
+    // validate input
+    if (!toCurrency || !fromCurrency) return;
+
+    //show loading
     convertView.showSpinner();
 
-    //4) Convert it
-    await state.converter.convertCurrency();
+    //Fetch rate from cache
+    const item = await state.idb.getItem(state.converter.query);
 
-    //5) Save To DB
-    if(state.converter.rates) {
-        const key = state.converter.query;
-        const val = state.converter.rates;
-        state.idb.setItem(key, val);
+    if (item) {
+        //if item is in cache
+        state.converter.convertOffline(item.val);
+    } else {
+        //Convert Online
+        await state.converter.convertOnline();
+        //5) Save To DB
+        if (state.converter.rates) {
+            const key = state.converter.query;
+            const val = state.converter.rates;
+            state.idb.setItem(key, val);
+        }
     }
 
-    if(state.converter.error) return convertView.showError(state.converter.error)
+    // If error
+    if (state.converter.error) return convertView.showError(state.converter.error);
+    if (!state.converter.result || !amount) return convertView.clearResults();
 
-    //5) Convert it
-    if(!state.converter.result || !amount)  return convertView.clearResults();
-
-
-    //5)Display Result
+    // Display Result
     convertView.displayResults(state.converter.result);
 
 }
@@ -91,8 +101,8 @@ const convertController = async () => {
 // HELPER FUNCTIONS
 //===================================
 
-const handleInputChange = (event)=> {
-        convertController();
+const handleInputChange = (event) => {
+    convertController();
 }
 
 // const debounce = (delay, fn) => {
@@ -119,8 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 elements.amountInput.addEventListener("input", handleInputChange);
-elements.fromCurrency.addEventListener("change",handleInputChange);
-elements.toCurrency.addEventListener("change",handleInputChange);
+elements.fromCurrency.addEventListener("change", handleInputChange);
+elements.toCurrency.addEventListener("change", handleInputChange);
 
 //===================================
 // 
