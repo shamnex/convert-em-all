@@ -11,6 +11,12 @@ html {
 body {
   box-sizing: border-box; }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
 body {
   font-family: "Raleway", sans-serif;
   font-weight: 300;
@@ -71,7 +77,6 @@ body {
     background-position-y: 400%;
     background: linear-gradient(to right top, #31B808, #0A6F6C); }
   .btn:hover {
-    transform: translateY(-0.3rem);
     box-shadow: 0 10px 20px rgba(51, 51, 51, 0.2); }
     .btn:hover::before {
       background-position-y: 200%;
@@ -221,8 +226,10 @@ input:checked + label {
     top: 0;
     background: url("../img/bg_pattern_white.svg");
     background-size: 70rem;
-    opacity: 0.09;
-    overflow: hidden; }
+    opacity: 0.09; }
+    @media (max-width: 37.5em) {
+      .index-body::before {
+        background-size: 30rem; } }
   .index-body .container {
     max-height: 50rem;
     border-right: 3rem;
@@ -236,6 +243,12 @@ input:checked + label {
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 1.8rem 2.8rem 10rem rgba(51, 51, 51, 0.9); }
+    @media (max-width: 56.25em) {
+      .index-body .container {
+        max-height: 100%;
+        height: 50rem;
+        max-width: 80rem;
+        width: calc(100vw - 2rem); } }
     @media (max-width: 37.5em) {
       .index-body .container {
         max-height: 100%;
@@ -252,16 +265,17 @@ input:checked + label {
         background: url("../img/bg_pattern.svg");
         background-size: 30rem;
         opacity: 0.05;
-        overflow: hidden; } }
+        overflow: hidden;
+        z-index: -10; } }
     .index-body .container__header {
-      background: #F4F4F4;
+      background: #e7e7e7;
       padding: 2rem;
       position: relative; }
       .index-body .container__header::after {
         background: linear-gradient(to right top, #31B808, #0A6F6C);
         content: "";
-        height: .5rem;
-        width: 50%;
+        height: 1rem;
+        width: 100%;
         position: absolute;
         left: 0;
         bottom: 0;
@@ -269,6 +283,7 @@ input:checked + label {
         transform: translateX(-50%); }
         @media (max-width: 37.5em) {
           .index-body .container__header::after {
+            height: 1rem;
             width: 100%; } }
     .index-body .container__body {
       position: absolute;
@@ -284,47 +299,53 @@ input:checked + label {
     justify-content: center; }
     @media (max-width: 37.5em) {
       .index-body .converter {
-        flex-direction: column; } }
+        flex-direction: column;
+        margin-top: 20%;
+        align-items: stretch;
+        justify-content: end; } }
     @media (max-width: 37.5em) {
       .index-body .converter__item {
         text-align: center; } }
     .index-body .converter .input-group {
       display: flex;
       align-items: center;
-      flex-grow: 1; }
+      margin: 1rem;
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
       @media (max-width: 37.5em) {
         .index-body .converter .input-group {
-          margin-top: 2rem;
-          box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); } }
+          margin: 0;
+          margin-top: 2rem; } }
       .index-body .converter .input-group__amount {
-        flex-grow: 1; }
+        flex-shrink: 2.5;
+        margin-right: 1rem;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+        @media (max-width: 37.5em) {
+          .index-body .converter .input-group__amount {
+            margin-right: 0; } }
       .index-body .converter .input-group__currency {
         color: #0A6F6C;
         font-weight: 300;
         padding: 0;
         text-align: center;
         padding: 2rem; }
-  .index-body .btn {
-    width: 50%;
-    text-align: center;
-    margin: 0 auto;
-    display: block;
-    margin-top: 6rem;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%); }
   .index-body .results {
-    margin-top: 6rem;
     position: absolute;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
+    padding: 1rem;
+    bottom: 0;
+    left: 0;
+    min-height: 20rem;
     background-image: #F4F4F4; }
+    @media (max-width: 37.5em) {
+      .index-body .results {
+        min-height: 20vh;
+        padding: 0;
+        margin-top: 10%;
+        max-height: 20rem; } }
     .index-body .results::before {
       content: "";
       height: 100%;
+      text-align: center;
       width: 100%;
       position: absolute;
       left: 0;
@@ -333,18 +354,73 @@ input:checked + label {
       background-size: 30rem;
       opacity: 0.04;
       overflow: hidden; }
+      @media (max-width: 37.5em) {
+        .index-body .results::before {
+          background: none;
+          margin-top: 2rem;
+          z-index: -100;
+          height: 0; } }
     .index-body .results__from {
       color: #b3b3b3;
       font-size: 4.4rem;
       font-weight: 300;
       display: inline-block; }
+      @media (max-width: 56.25em) {
+        .index-body .results__from {
+          color: black;
+          font-weight: 400;
+          font-size: 2.4rem; } }
+      @media (max-width: 37.5em) {
+        .index-body .results__from {
+          color: black;
+          font-weight: 400;
+          font-size: 2.4rem; } }
       .index-body .results__from span {
         font-size: 3.8rem; }
+        @media (max-width: 56.25em) {
+          .index-body .results__from span {
+            font-weight: 400;
+            font-size: 2.3rem; } }
+        @media (max-width: 37.5em) {
+          .index-body .results__from span {
+            font-weight: 400;
+            font-size: 1.4rem; } }
     .index-body .results__to {
       display: inline-block;
       color: #0A6F6C;
+      font-weight: 300;
       font-size: 6rem; }
+      @media (max-width: 56.25em) {
+        .index-body .results__to {
+          font-size: 4rem; } }
+      @media (max-width: 37.5em) {
+        .index-body .results__to {
+          font-weight: 400;
+          font-size: 3rem; } }
       .index-body .results__to span {
         font-size: 3.8rem;
         color: #b3b3b3;
         font-weight: 300; }
+        @media (max-width: 56.25em) {
+          .index-body .results__to span {
+            color: black;
+            font-size: 2.8rem; } }
+        @media (max-width: 37.5em) {
+          .index-body .results__to span {
+            color: black;
+            font-size: 1.4rem; } }
+    .index-body .results__error {
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: #da4471 !important;
+      text-transform: capitalize; }
+      .index-body .results__error--message {
+        margin: 2rem 0; }
+      .index-body .results__error--btn {
+        width: 20rem;
+        text-align: center;
+        margin: 0 auto;
+        font-size: 2.0rem; }
+        @media (max-width: 37.5em) {
+          .index-body .results__error--btn {
+            margin: 0 auto; } }
