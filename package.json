@@ -5,7 +5,7 @@
     "main": "app.js",
     "scripts": {
         "compile:sass": "node-sass src/sass/main.scss dist/css/style.css -w",
-        "start": "concurrently \"npm run compile:sass\" \"npm run build\" \"live-server ./dist \"",
+        "start": "concurrently \"npm run compile:sass\" \"npm run dev\" \"live-server ./dist \"",
         "build": "webpack --mode production -w",
         "dev": "webpack --mode development -w"
     },

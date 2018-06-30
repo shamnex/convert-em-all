@@ -1,0 +1,38 @@
+.toast {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 -3rem 10rem rgba(0, 0, 0, 0.2);
+    width: 100%;
+    overflow: hidden;
+    height: 10rem;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    &__message {
+        text-align: center;
+    }
+
+    &__close {
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+        font-size: 5rem;
+        color: $color-danger;
+        padding: 2rem;
+  
+        
+    
+    }
+
+    &__btn {
+        text-align: center;
+        margin: 0 auto;
+        font-size: 2rem;
+        z-index: 10;
+        padding: 2rem 5rem;
+    }
+
+}

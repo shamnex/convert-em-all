@@ -11,8 +11,10 @@ const displayCurrency = (currency, element) => {
 
 
 export const displayCurrencies = (currencies) => {
+    if(!currencies) return false;
     currencies.forEach(currency => {
         displayCurrency(currency, elements.fromCurrency );
         displayCurrency(currency, elements.toCurrency );
     });
 }
+

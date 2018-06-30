@@ -2,35 +2,35 @@
 import Countries from "./models/country";
 import Currencies from "./models/currency";
 import ConvertCurrency from "./models/convert";
-import ServiceWorker from "./models/service-worker";
+import ServiceWorker from "./controllers/service-worker";
 import * as currencyView from "./views/currencyView"
 import * as convertView from "./views/convertView"
-import { elements } from './views/base';
+import * as toastView from "./views/toastView"
 
+import { elements } from './views/base';
 
 //===================================
 // APP STATE
 //===================================
-
 const state = {
 }
-
 //===================================
 // CONTROLLERS
 //===================================
 
 const swController = async () => {
-    
+
     state.serviceWorker = new ServiceWorker();
     await state.serviceWorker.registerSW();
     
 }
 
 const currencyController = async () => {
-
+    
     state.currencies = new Currencies();
     await state.currencies.getCurrencies();
     currencyView.displayCurrencies(state.currencies.currencies);
+
 }
 
 // const countryController = async () => {
@@ -39,7 +39,7 @@ const currencyController = async () => {
 //     //2 ) Get results //TODO
 //     state.countries = new Countries();
 //     await state.countries.getCountries();
-
+ 
 //     //RENDER COUNTRIES ON UI //TOT
 //     console.log(state.countries.countries);
 // }
@@ -61,7 +61,6 @@ const convertController = async () => {
     await state.converter.convertCurrency();
 
     if(state.converter.error) return convertView.showError(state.converter.error)
-
 
     //5) Convert it
     if(!state.converter.result || !amount)  return convertView.clearResults();
@@ -96,13 +95,11 @@ const handleInputChange = (event)=> {
 //===================================
 // EVENT LISTENERS
 //===================================
-
-window.onload =()=> {
+document.addEventListener("DOMContentLoaded", () => {
     // countryController();
     swController();
     currencyController();
-
-}
+})
 
 elements.amountInput.addEventListener("input", handleInputChange);
 elements.fromCurrency.addEventListener("change",handleInputChange);

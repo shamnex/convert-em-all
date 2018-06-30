@@ -1,4 +1,7 @@
-const CACHE_STATIC = "konvatam-skeleton-v36";
+//THIS SERVICE WORKER FILE IS IGNORED DURING WEBPACK"S BUNDLING
+// IT'S COPIED DIRECTLY INTO THE 'dist' FOLDER ROOT
+
+const CACHE_STATIC = "konvatam-skeleton-v53";
 const CACHE_DYNAMIC = "konvatam-dynamic";
 const APP_SHELL_URLS = [
     '/',
@@ -21,7 +24,7 @@ self.addEventListener('activate', (event) => {
         caches.keys()
             .then(keysArray => {
                 return Promise.all(keysArray.map((key) => {
-                    if (key !== CACHE_STATIC && key !== CACHE_DYNAMIC ) {
+                    if (key !== CACHE_STATIC && key !== CACHE_DYNAMIC) {
                         console.log("Removing old cache");
                         return caches.delete(key);
                     }
@@ -32,22 +35,29 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
     event.respondWith(
-        caches.match(event.request)
-            .then((response) => {
-                if (response) {
-                    return response;
-                } else {
-                    return fetch(event.request)
-                        .then((res) => {
-                            return caches.open(CACHE_DYNAMIC)
-                                .then((cache) => {
-                                    cache.put(event.request.url, res.clone());
-                                    return res;
-                                })
-                        }).catch((error) => {
+        caches.match(event.request) //check for match in cache
+            .then((cacheResponse) => {
+                if (cacheResponse) return cacheResponse; //if theres a match return it
+                
+                const requestClone = event.request.clone();
+                return fetch(requestClone) //if not fetch from networ
+                    .then((networkResponse) => {
+                        return caches.open(CACHE_DYNAMIC)// store the res  in cache 
+                            .then((cache) => {
+                                cache.put(requestClone.url, networkResponse.clone());
+                                return networkResponse; // restore clone 
+                            });
+                    }).catch((error) => {
 
-                        })
-                }
+                    })
+
             })
     );
 });
+
+self.addEventListener('message', (event) => {
+    if (event.data.action === 'skipWaiting') {
+        self.skipWaiting();
+    }
+});
+

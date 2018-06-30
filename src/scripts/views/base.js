@@ -4,3 +4,4 @@ export const elements = {
     amountInput: document.querySelector("#amount"),
     resultsWrapper: document.querySelector(".results"),
 };
+
