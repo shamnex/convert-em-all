@@ -24,7 +24,7 @@ export const clearResults = () => {
 
 export const showSpinner = () => {
     elements.resultsWrapper.innerHTML = `
-        loading...
+        <div class="loading"></div>
     `
 }
 
@@ -38,10 +38,11 @@ export const showError = (error) => {
            <div class="results__error--message">${message || error.message}</div> 
         </div>
 
-        <div class="btn results__error--btn">Retry</div>
-
     `
 }
+
+//<div class="btn results__error--btn">Retry</div>
+
 
 
 
