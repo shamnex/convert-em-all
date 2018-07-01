@@ -13,8 +13,6 @@ export default class Conversion {
     }
 
     async convertOnline() {
-        console.log("converting online");
-
         try {
             if (!this._fromCurrency || !this._toCurrency) return;
             this.rates = await (await fetch(this.url)).json();
@@ -27,7 +25,6 @@ export default class Conversion {
     }
 
     async convertOffline(rates) {
-        console.log("converting offline");
         try {
             if (!this._fromCurrency || !this._toCurrency) return;
             const value = +rates[this.query];
@@ -38,6 +35,10 @@ export default class Conversion {
     }
 
     async _convert(value) {
+
+        if(isNaN(+this._amount)) {
+            console.log(this._amount);
+        }
         if (value) {
             var total = value * this._amount;
             return this.result = Math.round(total * 100) / 100;

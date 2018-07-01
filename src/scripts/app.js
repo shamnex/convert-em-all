@@ -41,7 +41,7 @@ const convertController = async () => {
     const amount = await convertView.getAmountValue();
 
     //get hold of the converter
-    state.converter = new Converter(amount, fromCurrency, toCurrency);
+   state.converter = new Converter(amount, fromCurrency, toCurrency);
 
     // validate input
     if (!toCurrency || !fromCurrency) return;
@@ -86,7 +86,7 @@ const currencyController = async () => {
             state.currencies.setCurrencies(res.val);
         } else {
             state.idb
-            .setItem("currencies", await state.currencies.getCurrencies());
+                .setItem("currencies", await state.currencies.getCurrencies());
         }
     }
 
@@ -98,9 +98,24 @@ const currencyController = async () => {
 // HELPER FUNCTIONS
 //===================================
 
-const handleInputChange = () => {
+const handleInputChange = debounce(() => {
     convertController();
-}
+}, 2000)
+
+const  debounce = (func, wait, immediate) => {
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+};
 
 
 //===================================

@@ -277,7 +277,8 @@ input:checked + label {
   background-image: linear-gradient(to right top, #31B808, #0A6F6C);
   background-blend-mode: multiply;
   background-repeat: no-repeat;
-  height: 100vh; }
+  height: 100vh;
+  overflow: hidden; }
   .index-body::before {
     content: "";
     height: 100%;

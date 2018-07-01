@@ -3,6 +3,7 @@
     background-blend-mode: multiply;
     background-repeat: no-repeat;
     height: 100vh;
+    overflow: hidden;
     &::before {
         content: "";
         height: 100%;
