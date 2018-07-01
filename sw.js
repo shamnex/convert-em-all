@@ -1,7 +1,7 @@
 //THIS SERVICE WORKER FILE IS IGNORED DURING WEBPACK"S BUNDLING
 // IT'S COPIED DIRECTLY INTO THE 'dist' FOLDER ROOT
 
-const CACHE_STATIC = "konvatam-skeleton-v64";
+const CACHE_STATIC = "konvatam-skeleton-v66";
 const CACHE_DYNAMIC = "konvatam-dynamic";
 const APP_SHELL_URLS = [
     '/',
@@ -35,27 +35,17 @@ self.addEventListener('activate', (event) => {
             })
     );
 });
-
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', function(event) {
+    // TODO: respond to requests for the root page with
+    // the page skeleton from the cache
+  
     event.respondWith(
-        caches.match(event.request) //check for match in cache
-            .then((cacheResponse) => {
-                if (cacheResponse) return cacheResponse; //if theres a match return it
-                const requestClone = event.request.clone();
-                return fetch(requestClone) //if not fetch from networl
-                    .then((networkResponse) => {
-                        return caches.open(CACHE_DYNAMIC)// store the res  in cache 
-                            .then((cache) => {
-                                cache.put(requestClone.url, networkResponse.clone());
-                                return networkResponse; // restore clone 
-                            });
-                    }).catch((error) => {
-
-                    })
-
-            })
+      caches.match(event.request).then(function(response) {
+        return response || fetch(event.request);
+      })
     );
-});
+  });
+  
 
 self.addEventListener('message', (event) => {
     if (event.data.action === 'skipWaiting') {
