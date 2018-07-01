@@ -98,7 +98,7 @@ const currencyController = async () => {
 // HELPER FUNCTIONS
 //===================================
 
-const handleInputChange = (event) => {
+const handleInputChange = () => {
     convertController();
 }
 
