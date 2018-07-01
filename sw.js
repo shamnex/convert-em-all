@@ -1,8 +1,8 @@
 //THIS SERVICE WORKER FILE IS IGNORED DURING WEBPACK"S BUNDLING
 // IT'S COPIED DIRECTLY INTO THE 'dist' FOLDER ROOT
 
-const CACHE_STATIC = "konvatam-skeleton-v66";
-const CACHE_DYNAMIC = "konvatam-dynamic";
+const CACHE_STATIC = "konvatam-skeleton-v67";
+// const CACHE_DYNAMIC = "konvatam-dynamic";
 const APP_SHELL_URLS = [
     '/',
     '/index.html',
@@ -27,7 +27,7 @@ self.addEventListener('activate', (event) => {
         caches.keys()
             .then(keysArray => {
                 return Promise.all(keysArray.map((key) => {
-                    if (key !== CACHE_STATIC && key !== CACHE_DYNAMIC) {
+                    if (key !== CACHE_STATIC) {
                         console.log("Removing old cache");
                         return caches.delete(key);
                     }
@@ -35,10 +35,7 @@ self.addEventListener('activate', (event) => {
             })
     );
 });
-self.addEventListener('fetch', function(event) {
-    // TODO: respond to requests for the root page with
-    // the page skeleton from the cache
-  
+self.addEventListener('fetch', (event)=> {
     event.respondWith(
       caches.match(event.request).then(function(response) {
         return response || fetch(event.request);
