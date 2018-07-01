@@ -5,14 +5,14 @@
     height: 9rem;
     border-bottom: solid 1rem $color-primary;
     padding: 0 2rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 300;
     width: 100%;
     transition: all 0.3s ease;
 
     @include respond(phone) {
         height: 7rem;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         border-bottom: solid .7rem $color-primary;
     }
 
