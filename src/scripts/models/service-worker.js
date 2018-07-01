@@ -6,7 +6,7 @@ export default class ServiceWorker {
     async registerSW() {
         if (!navigator.serviceWorker) return;
         try {
-            this.registration = await navigator.serviceWorker.register(`${window.location.href}sw.js`);
+            this.registration = await navigator.serviceWorker.register(`${window.location.href}sw.js`,{scope: "/konvatam/"});
             if (this.registration) console.log("Service Worker Registered");
 
             if (!navigator.serviceWorker.controller) return;
