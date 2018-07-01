@@ -1,7 +1,7 @@
 //THIS SERVICE WORKER FILE IS IGNORED DURING WEBPACK"S BUNDLING
 // IT'S COPIED DIRECTLY INTO THE 'dist' FOLDER ROOT
 
-const CACHE_STATIC = "konvatam-skeleton-v79";
+const CACHE_STATIC = "konvatam-skeleton-v78";
 // const CACHE_DYNAMIC = "konvatam-dynamic";
 const APP_SHELL_URLS = [
     '',
@@ -10,7 +10,7 @@ const APP_SHELL_URLS = [
     'img/bg_pattern_white.svg',
     'img/bg_pattern.svg',
     'scripts/bundle.js',
-].map(url => self.registration.scope+url).concat([
+].map(url => `${window.location.href}${url}`).concat([
     'https://fonts.gstatic.com/s/raleway/v12/1Ptug8zYS_SKggPNyC0IT4ttDfA.woff2',
     'https://fonts.gstatic.com/s/raleway/v12/1Ptrg8zYS_SKggPNwIYqWqZPANqczVs.woff2'
 ])
