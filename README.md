@@ -1,4 +1,4 @@
-# konvatam
+# KONVATAM
 # ACL
 
 https://shamnex.github.io/konvatam/
@@ -21,3 +21,9 @@ A progressive web application that convert currencies from one country to anothe
 * **IndexedDB** [indexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
 
 * **Free Currency Converterapi** [Freecurrencyconverterapi](https://www.currencyconverterapi.com)
+
+### Installation
+
+npm run i
+
+npm run serve
