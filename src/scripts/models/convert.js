@@ -37,10 +37,6 @@ export default class Conversion {
     }
 
     async _convert(value) {
-
-        if(isNaN(+this._amount)) {
-            console.log(this._amount);
-        }
         if (value) {
             var total = value * this._amount;
             return this.result = Math.round(total * 100) / 100;
