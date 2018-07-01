@@ -13,6 +13,7 @@ export default class Conversion {
     }
 
     async convertOnline() {
+        console.log("converting online");
         try {
             if (!this._fromCurrency || !this._toCurrency) return;
             this.rates = await (await fetch(this.url)).json();
@@ -25,6 +26,7 @@ export default class Conversion {
     }
 
     async convertOffline(rates) {
+        console.log("converting offline");
         try {
             if (!this._fromCurrency || !this._toCurrency) return;
             const value = +rates[this.query];

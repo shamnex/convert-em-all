@@ -98,10 +98,12 @@ const currencyController = async () => {
 // HELPER FUNCTIONS
 //===================================
 
-const handleInputChange = debounce(() => {
+const handleInputChange = () => {
     convertController();
-}, 2000)
+}
 
+
+//debounce stolen from _underscore.js to delay immediate execution of keypress events
 const  debounce = (func, wait, immediate) => {
 	var timeout;
 	return function() {
@@ -128,15 +130,9 @@ document.addEventListener("DOMContentLoaded", () => {
     swController();
 })
 
-
-
-elements.amountInput.addEventListener("input", handleInputChange);
+elements.amountInput.addEventListener("input", debounce(handleInputChange, 1000));
 elements.fromCurrency.addEventListener("change", handleInputChange);
 elements.toCurrency.addEventListener("change", handleInputChange);
-
-//===================================
-// INIT CONTROLLERS
-//===================================
 
 
 
