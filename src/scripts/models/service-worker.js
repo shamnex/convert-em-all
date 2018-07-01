@@ -1,12 +1,12 @@
-import * as toastView from "../views/toastView"
+import * as toastView from "../views/toastView";
 
 export default class ServiceWorker {
     constructor() { }
-
+    
     async registerSW() {
         if (!navigator.serviceWorker) return;
         try {
-            this.registration = await navigator.serviceWorker.register("/sw.js");
+            this.registration = await navigator.serviceWorker.register(`${window.location.href}sw.js`);
             if (this.registration) console.log("Service Worker Registered");
 
             if (!navigator.serviceWorker.controller) return;
