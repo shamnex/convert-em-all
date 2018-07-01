@@ -20,7 +20,7 @@ body {
 body {
   font-family: "Raleway", sans-serif;
   font-weight: 300;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   color: #333333;
   line-height: 1.7;
   padding: 3rem; }
@@ -124,14 +124,14 @@ body {
   height: 9rem;
   border-bottom: solid 1rem #0A6F6C;
   padding: 0 2rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 300;
   width: 100%;
   transition: all 0.3s ease; }
   @media (max-width: 37.5em) {
     .input {
       height: 7rem;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       border-bottom: solid 0.7rem #0A6F6C; } }
   .input__border-secondary {
     border-bottom: solid 1rem #31B808; }
