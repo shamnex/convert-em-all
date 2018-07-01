@@ -20,6 +20,11 @@ const state = {
 // CONTROLLERS
 //===================================
 
+const idbController = async () => {
+    state.idb = new IDB();
+}
+
+
 const swController = async () => {
 
     state.serviceWorker = new ServiceWorker();
@@ -27,33 +32,6 @@ const swController = async () => {
 
 }
 
-const idbController = async () => {
-
-    state.idb = new IDB();
-    state.idb.open();
-
-}
-
-
-const currencyController = async () => {
-
-    state.currencies = new Currencies();
-    await state.currencies.getCurrencies();
-    currencyView.displayCurrencies(state.currencies.currencies);
-    state.idb.setItem({id:, state.currencies.currencies});
-
-}
-
-// const countryController = async () => {
-//     //1) Prepare UI //TODO
-
-//     //2 ) Get results //TODO
-//     state.countries = new Countries();
-//     await state.countries.getCountries();
-
-//     //RENDER COUNTRIES ON UI //TOT
-//     console.log(state.countries.countries);
-// }
 
 const convertController = async () => {
 
@@ -97,6 +75,25 @@ const convertController = async () => {
 
 }
 
+
+const currencyController = async () => {
+    //fetch currencies from CACHE
+    state.currencies = new Currencies();
+    if (!state.idb._db) {
+        const db = await state.idb.dbPromise;
+        const res = await state.idb.getItem("currencies", db);
+        if (res) {
+            state.currencies.setCurrencies(res.val);
+        } else {
+            state.idb
+            .setItem("currencies", await state.currencies.getCurrencies());
+        }
+    }
+
+    currencyView.displayCurrencies(state.currencies.currencies);
+
+}
+
 //===================================
 // HELPER FUNCTIONS
 //===================================
@@ -105,35 +102,27 @@ const handleInputChange = (event) => {
     convertController();
 }
 
-// const debounce = (delay, fn) => {
-//     let timerId;
-//     return function (...args) {
-//       if (timerId) {
-//         clearTimeout(timerId);
-//       }
-//       timerId = setTimeout(() => {
-//         fn(...args);
-//         timerId = null;
-//       }, delay);
-//     }
-//   }
 
 //===================================
 // EVENT LISTENERS
 //===================================
 document.addEventListener("DOMContentLoaded", () => {
     // countryController();
-    swController();
     idbController();
     currencyController();
+    swController();
 })
+
+
 
 elements.amountInput.addEventListener("input", handleInputChange);
 elements.fromCurrency.addEventListener("change", handleInputChange);
 elements.toCurrency.addEventListener("change", handleInputChange);
 
 //===================================
-// 
+// INIT CONTROLLERS
 //===================================
+
+
 
 
