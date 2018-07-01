@@ -1,7 +1,7 @@
 //THIS SERVICE WORKER FILE IS IGNORED DURING WEBPACK"S BUNDLING
 // IT'S COPIED DIRECTLY INTO THE 'dist' FOLDER ROOT
 
-const CACHE_STATIC = "konvatam-skeleton-v75";
+const CACHE_STATIC = "konvatam-skeleton-v76";
 // const CACHE_DYNAMIC = "konvatam-dynamic";
 const APP_SHELL_URLS = [
     '/',
