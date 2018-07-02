@@ -24,7 +24,7 @@ A progressive web application that convert currencies from one country to anothe
 
 ### Installation
 
-npm run i
+npm install
 
 npm run serve
 
