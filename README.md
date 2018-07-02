@@ -27,3 +27,7 @@ A progressive web application that convert currencies from one country to anothe
 npm run i
 
 npm run serve
+
+### Missing 
+
+Application Manisfest to make app installable
